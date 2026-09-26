@@ -1,0 +1,7 @@
+[zh]
+    label  = "简体中文"
+    title  = "hanyuluo's blog"
+    weight = 1
+
+    [zh.params.sidebar]
+        subtitle = "记录技术与生活的博客"

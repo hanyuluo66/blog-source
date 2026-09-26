@@ -1,0 +1,21 @@
+baseURL = "/"
+locale = "zh-cn"
+title = "hanyuluo's blog"
+theme = "hugo-theme-stack"
+defaultContentLanguage = "zh"
+hasCJKLanguage = true
+copyright = "hanyuluo"
+
+[pagination]
+    pagerSize = 5
+
+[permalinks]
+    post = "/p/:slug/"
+    page = "/:slug/"
+
+[markup]
+    [markup.highlight]
+        style = "dracula"
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true

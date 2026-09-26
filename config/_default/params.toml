@@ -1,0 +1,39 @@
+mainSections   = ["post"]
+rssFullContent = true
+favicon        = "img/avatar.png"
+
+[footer]
+    since = 2026
+
+[sidebar]
+    disableCategories = false  # 确保分类页显示
+    disableMenu = true         # 【关键】这行代码会隐藏系统自动生成的文章首页/作者页等默认菜单
+    emoji    = "💻"
+    subtitle = "记录技术与生活的博客"
+    avatar   = "img/avatar.png"
+
+[article]
+    [article.license]
+        enabled = true
+        default = "Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)"
+
+[widgets]
+    homepage = [
+        { type = "search" },
+        { type = "archives", params = { limit = 5 } },
+        { type = "categories", params = { limit = 10 } },
+        { type = "tag-cloud", params = { limit = 10 } },
+    ]
+    page     = [{ type = "toc" }]
+
+[comments]
+    enabled  = false
+    provider = "disqus"
+
+[cookies]
+    enabled = false
+
+[menus]
+  [[menus.main]]
+    identifier = "home"
+    params = { hidden = true }
