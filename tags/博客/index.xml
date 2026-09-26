@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>博客 on hanyuluo&#39;s blog</title>
+        <link>//localhost:1313/tags/%E5%8D%9A%E5%AE%A2/</link>
+        <description>Recent content in 博客 on hanyuluo&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>hanyuluo</copyright>
+        <lastBuildDate>Sat, 26 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>你好，世界！</title>
+            <link>//localhost:1313/p/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/</link>
+            <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+            <guid>//localhost:1313/p/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/</guid>
+            <description>&lt;h1 id=&#34;你好世界&#34;&gt;你好，世界！&#xA;&lt;/h1&gt;&lt;p&gt;这是我的第一篇博客文章。&lt;/p&gt;&#xA;&lt;h2 id=&#34;为什么要写博客&#34;&gt;为什么要写博客&#xA;&lt;/h2&gt;&lt;p&gt;写博客是一种很好的学习方式：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;整理思路&lt;/strong&gt;：把学到的东西写下来，帮助加深理解&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;分享知识&lt;/strong&gt;：也许能帮到有同样问题的人&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;记录成长&lt;/strong&gt;：回顾自己的学习历程&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;博客主题&#34;&gt;博客主题&#xA;&lt;/h2&gt;&lt;p&gt;这个博客主要会分享：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;技术学习笔记&lt;/li&gt;&#xA;&lt;li&gt;编程实践经验&lt;/li&gt;&#xA;&lt;li&gt;偶尔的生活感悟&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;开始吧&#34;&gt;开始吧&#xA;&lt;/h2&gt;&lt;p&gt;希望这是一个好的开始。让我们一起进步！&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;感谢阅读！&lt;/em&gt;&lt;/p&gt;&#xA;</description>
+        </item></channel>
+</rss>

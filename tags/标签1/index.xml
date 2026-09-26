@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>标签1 on hanyuluo&#39;s blog</title>
+        <link>//localhost:1313/tags/%E6%A0%87%E7%AD%BE1/</link>
+        <description>Recent content in 标签1 on hanyuluo&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>hanyuluo</copyright>
+        <lastBuildDate>Sat, 26 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/%E6%A0%87%E7%AD%BE1/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>我的第一篇文章</title>
+            <link>//localhost:1313/p/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</link>
+            <pubDate>Sat, 26 Sep 2026 00:00:00 +0000</pubDate>
+            <guid>//localhost:1313/p/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</guid>
+            <description>&lt;h1 id=&#34;文章标题&#34;&gt;文章标题&#xA;&lt;/h1&gt;&lt;p&gt;在这里写你的正文内容。支持 Markdown 语法。&lt;/p&gt;&#xA;&lt;h2 id=&#34;二级标题&#34;&gt;二级标题&#xA;&lt;/h2&gt;&lt;h3 id=&#34;三级标题&#34;&gt;三级标题&#xA;&lt;/h3&gt;&lt;ul&gt;&#xA;&lt;li&gt;列表项 1&lt;/li&gt;&#xA;&lt;li&gt;列表项 2&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 代码块&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Hello World&amp;#34;&lt;/span&gt;)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;引用文字&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;加粗&lt;/strong&gt; &lt;em&gt;斜体&lt;/em&gt; &lt;code&gt;行内代码&lt;/code&gt;&lt;/p&gt;&#xA;</description>
+        </item></channel>
+</rss>
