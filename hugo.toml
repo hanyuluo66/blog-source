@@ -1,4 +1,5 @@
-baseURL = "/"
+relativeURLs = true
+baseURL = 'https://hanyuluo66.github.io/blog-source/'
 locale = "zh-cn"
 title = "hanyuluo's blog"
 theme = "hugo-theme-stack"
