@@ -1,0 +1,923 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="本周完成C语言收尾（共用体、枚举、动态内存、文件操作、链表），并正式进入C++（命名空间、string、vector、引用与函数重载）。"><title>10.11学习周报</title><link rel=canonical href=https://hanyuluo66.github.io/blog-source/p/10.11-weekly-report/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/blog-source/scss/style.min.6c875234350e518395efbf51958523b0852fb2215ab8cb81358f9317153eba2d.css><meta property='og:title' content="10.11学习周报"><meta property='og:description' content="本周完成C语言收尾（共用体、枚举、动态内存、文件操作、链表），并正式进入C++（命名空间、string、vector、引用与函数重载）。"><meta property='og:url' content='https://hanyuluo66.github.io/blog-source/p/10.11-weekly-report/'><meta property='og:site_name' content="hanyuluo's blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='C语言'><meta property='article:tag' content='C++'><meta property='article:tag' content='链表'><meta property='article:tag' content='学习周报'><meta property='article:published_time' content='2026-10-11T00:00:00+00:00'><meta property='article:modified_time' content='2026-10-11T00:00:00+00:00'><meta name=twitter:title content="10.11学习周报"><meta name=twitter:description content="本周完成C语言收尾（共用体、枚举、动态内存、文件操作、链表），并正式进入C++（命名空间、string、vector、引用与函数重载）。"><link rel="shortcut icon" href=/blog-source/img/avatar.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blog-source/><img src=/blog-source/img/avatar.png width=1080 height=1080 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>💻</span></figure><div class=site-meta><h1 class=site-name><a href=/blog-source/>hanyuluo's blog</a></h1><h2 class=site-description>记录技术与生活的博客</h2></div></header><ol class=menu-social><li><a href=https://github.com/ title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blog-source/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>首页</span></a></li><li><a href=/blog-source/archives><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/blog-source/about><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li><a href=/blog-source/search><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav class=toc-nav id=TableOfContents><ul><li><a href=#一共用体枚举与-typedef>一、共用体、枚举与 typedef</a><ul><li><a href=#11-共用体union的内存特性>1.1 共用体（union）的内存特性</a></li><li><a href=#12-实用案例判断机器的大小端>1.2 实用案例：判断机器的大小端</a></li><li><a href=#13-枚举enum>1.3 枚举（enum）</a></li><li><a href=#14-typedef-的四种常见用法>1.4 typedef 的四种常见用法</a></li><li><a href=#15-关键要点>1.5 关键要点</a></li></ul></li><li><a href=#二动态内存分配与内存四区模型>二、动态内存分配与内存四区模型</a><ul><li><a href=#21-内存四区本周最重要的概念>2.1 内存四区（本周最重要的概念）</a></li><li><a href=#22-四个内存函数的区别>2.2 四个内存函数的区别</a></li><li><a href=#23-实战案例动态学生数组>2.3 实战案例：动态学生数组</a></li><li><a href=#24-三类典型内存错误>2.4 三类典型内存错误</a></li><li><a href=#25-关键要点>2.5 关键要点</a></li></ul></li><li><a href=#三文件操作>三、文件操作</a><ul><li><a href=#31-打开与关闭>3.1 打开与关闭</a></li><li><a href=#32-三种文本读写方式>3.2 三种文本读写方式</a></li><li><a href=#33-二进制块读写效率更高>3.3 二进制块读写（效率更高）</a></li><li><a href=#34-文件指针定位>3.4 文件指针定位</a></li><li><a href=#35-实战案例学生通讯录数据持久化>3.5 实战案例：学生通讯录（数据持久化）</a></li><li><a href=#36-关键要点>3.6 关键要点</a></li></ul></li><li><a href=#四链表本周重点>四、链表（本周重点）</a><ul><li><a href=#41-为什么需要链表>4.1 为什么需要链表</a></li><li><a href=#42-节点定义>4.2 节点定义</a></li><li><a href=#43-完整实现增删改查>4.3 完整实现：增删改查</a></li><li><a href=#44-为什么函数参数要用-node-head>4.4 为什么函数参数要用 <code>Node **head</code></a></li><li><a href=#45-链表-vs-数组>4.5 链表 vs 数组</a></li><li><a href=#46-关键要点>4.6 关键要点</a></li></ul></li><li><a href=#五c-入门命名空间iostringvector>五、C++ 入门：命名空间、IO、string、vector</a><ul><li><a href=#51-命名空间namespace>5.1 命名空间（namespace）</a></li><li><a href=#52-cin--cout-对比-scanf--printf>5.2 cin / cout 对比 scanf / printf</a></li><li><a href=#53-string-常用操作>5.3 string 常用操作</a></li><li><a href=#54-vector-容器>5.4 vector 容器</a></li><li><a href=#55-实战用-c-重写通讯录>5.5 实战：用 C++ 重写通讯录</a></li><li><a href=#56-c-与-c-写法对照>5.6 C 与 C++ 写法对照</a></li><li><a href=#57-关键要点>5.7 关键要点</a></li></ul></li><li><a href=#六c-引用与函数提高>六、C++ 引用与函数提高</a><ul><li><a href=#61-引用是什么>6.1 引用是什么</a></li><li><a href=#62-引用作函数参数对比指针写法>6.2 引用作函数参数（对比指针写法）</a></li><li><a href=#63-引用作返回值>6.3 引用作返回值</a></li><li><a href=#64-引用-vs-指针三个核心区别>6.4 引用 vs 指针（三个核心区别）</a></li><li><a href=#65-函数默认参数>6.5 函数默认参数</a></li><li><a href=#66-函数重载>6.6 函数重载</a></li><li><a href=#67-重载与默认参数的冲突>6.7 重载与默认参数的冲突</a></li><li><a href=#68-关键要点>6.8 关键要点</a></li></ul></li><li><a href=#七常见坑点整理>七、常见坑点整理</a></li><li><a href=#八本周学习总结>八、本周学习总结</a><ul><li><a href=#本周最大的收获>本周最大的收获</a></li><li><a href=#下周计划>下周计划</a></li></ul></li></ul></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/blog-source/categories/%E5%AD%A6%E4%B9%A0/ style=background-color:#c8efbe;color:#183d0f>学习</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blog-source/p/10.11-weekly-report/>10.11学习周报</a></h2></div><footer class=article-meta><div class=inline-meta><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-10-11T00:00:00Z>2026年10月11日星期日</time>
+<svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 18 分钟</time></div></footer></div></header><aside class=article-toc><details><summary><div class=article-toc-title><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6-6 6"/></svg>
+<span>目录</span></div></summary><nav class=toc-nav><ul><li><a href=#一共用体枚举与-typedef>一、共用体、枚举与 typedef</a><ul><li><a href=#11-共用体union的内存特性>1.1 共用体（union）的内存特性</a></li><li><a href=#12-实用案例判断机器的大小端>1.2 实用案例：判断机器的大小端</a></li><li><a href=#13-枚举enum>1.3 枚举（enum）</a></li><li><a href=#14-typedef-的四种常见用法>1.4 typedef 的四种常见用法</a></li><li><a href=#15-关键要点>1.5 关键要点</a></li></ul></li><li><a href=#二动态内存分配与内存四区模型>二、动态内存分配与内存四区模型</a><ul><li><a href=#21-内存四区本周最重要的概念>2.1 内存四区（本周最重要的概念）</a></li><li><a href=#22-四个内存函数的区别>2.2 四个内存函数的区别</a></li><li><a href=#23-实战案例动态学生数组>2.3 实战案例：动态学生数组</a></li><li><a href=#24-三类典型内存错误>2.4 三类典型内存错误</a></li><li><a href=#25-关键要点>2.5 关键要点</a></li></ul></li><li><a href=#三文件操作>三、文件操作</a><ul><li><a href=#31-打开与关闭>3.1 打开与关闭</a></li><li><a href=#32-三种文本读写方式>3.2 三种文本读写方式</a></li><li><a href=#33-二进制块读写效率更高>3.3 二进制块读写（效率更高）</a></li><li><a href=#34-文件指针定位>3.4 文件指针定位</a></li><li><a href=#35-实战案例学生通讯录数据持久化>3.5 实战案例：学生通讯录（数据持久化）</a></li><li><a href=#36-关键要点>3.6 关键要点</a></li></ul></li><li><a href=#四链表本周重点>四、链表（本周重点）</a><ul><li><a href=#41-为什么需要链表>4.1 为什么需要链表</a></li><li><a href=#42-节点定义>4.2 节点定义</a></li><li><a href=#43-完整实现增删改查>4.3 完整实现：增删改查</a></li><li><a href=#44-为什么函数参数要用-node-head>4.4 为什么函数参数要用 <code>Node **head</code></a></li><li><a href=#45-链表-vs-数组>4.5 链表 vs 数组</a></li><li><a href=#46-关键要点>4.6 关键要点</a></li></ul></li><li><a href=#五c-入门命名空间iostringvector>五、C++ 入门：命名空间、IO、string、vector</a><ul><li><a href=#51-命名空间namespace>5.1 命名空间（namespace）</a></li><li><a href=#52-cin--cout-对比-scanf--printf>5.2 cin / cout 对比 scanf / printf</a></li><li><a href=#53-string-常用操作>5.3 string 常用操作</a></li><li><a href=#54-vector-容器>5.4 vector 容器</a></li><li><a href=#55-实战用-c-重写通讯录>5.5 实战：用 C++ 重写通讯录</a></li><li><a href=#56-c-与-c-写法对照>5.6 C 与 C++ 写法对照</a></li><li><a href=#57-关键要点>5.7 关键要点</a></li></ul></li><li><a href=#六c-引用与函数提高>六、C++ 引用与函数提高</a><ul><li><a href=#61-引用是什么>6.1 引用是什么</a></li><li><a href=#62-引用作函数参数对比指针写法>6.2 引用作函数参数（对比指针写法）</a></li><li><a href=#63-引用作返回值>6.3 引用作返回值</a></li><li><a href=#64-引用-vs-指针三个核心区别>6.4 引用 vs 指针（三个核心区别）</a></li><li><a href=#65-函数默认参数>6.5 函数默认参数</a></li><li><a href=#66-函数重载>6.6 函数重载</a></li><li><a href=#67-重载与默认参数的冲突>6.7 重载与默认参数的冲突</a></li><li><a href=#68-关键要点>6.8 关键要点</a></li></ul></li><li><a href=#七常见坑点整理>七、常见坑点整理</a></li><li><a href=#八本周学习总结>八、本周学习总结</a><ul><li><a href=#本周最大的收获>本周最大的收获</a></li><li><a href=#下周计划>下周计划</a></li></ul></li></ul></nav></details></aside><section class=article-content><h1 id=1011-学习周报>10.11 学习周报</h1><blockquote><p>本周是 <strong>C 语言收尾 → 进入 C++</strong> 的过渡周。前四天把 C 语言剩下的硬骨头啃完（共用体/枚举、动态内存、文件操作、链表），后三天正式跨进 C++，学完了命名空间、<code>string</code>、<code>vector</code>、引用和函数重载。</p><p>其中 <strong>链表</strong> 和 <strong>引用</strong> 是本周两个最大的卡点，代码都手写跑通了。</p></blockquote><hr><h2 id=一共用体枚举与-typedef>一、共用体、枚举与 typedef</h2><h3 id=11-共用体union的内存特性>1.1 共用体（union）的内存特性</h3><ul><li>所有成员<strong>共用同一块内存</strong>，起始地址相同</li><li><code>sizeof(union)</code> 等于<strong>最大成员</strong>的大小（还要考虑内存对齐）</li><li>同一时刻<strong>只能有一个成员有效</strong>，写入新成员会覆盖旧成员</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>union</span> Data {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span>   i;    <span style=color:#6272a4>// 4 字节
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>char</span>  c;    <span style=color:#6272a4>// 1 字节
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>double</span> d;   <span style=color:#6272a4>// 8 字节
+</span></span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>union</span> Data u;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;sizeof(union Data) = %lu</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, <span style=color:#ff79c6>sizeof</span>(u));  <span style=color:#6272a4>// 输出 8
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    u.i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>65</span>;
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;u.i = %d, u.c = %c</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, u.i, u.c);  <span style=color:#6272a4>// 65, &#39;A&#39;（65 的 ASCII 是 A）
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    u.d <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>3.14</span>;
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 此时 u.i 已被覆盖，值不再是 65
+</span></span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;写入 u.d 后，u.i = %d（已被破坏）</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, u.i);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=12-实用案例判断机器的大小端>1.2 实用案例：判断机器的大小端</h3><p>利用共用体成员共享地址的特性，可以判断当前机器的字节序：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>union</span> Endian {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span>  i;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>char</span> c[<span style=color:#ff79c6>sizeof</span>(<span style=color:#8be9fd>int</span>)];
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>union</span> Endian e;
+</span></span><span style=display:flex><span>    e.i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 如果最低地址字节是 1，说明低位存低地址 → 小端
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (e.c[<span style=color:#bd93f9>0</span>] <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>1</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;本机为 小端存储 (Little-Endian)</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
+</span></span><span style=display:flex><span>    } <span style=color:#ff79c6>else</span> {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;本机为 大端存储 (Big-Endian)</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>内存示意</strong>（小端机器，<code>int</code> 占 4 字节）：</p><pre tabindex=0><code>地址：  0x100  0x101  0x102  0x103
+内容：   01     00     00     00      ← 低字节放在低地址
+</code></pre><h3 id=13-枚举enum>1.3 枚举（enum）</h3><ul><li>默认从 <code>0</code> 开始递增，可以手动指定某个值，<strong>后面的值跟着顺延</strong></li><li>本质是<strong>整型常量</strong>，让代码可读性远高于写死的数字</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 指定 MON = 1，后面自动 2、3、4...
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>enum</span> Weekday { MON <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>, TUE, WED, THU, FRI, SAT, SUN };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 跳号也可以
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>enum</span> Level { LOW <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>, MID <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>20</span>, HIGH <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>100</span> };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>enum</span> Weekday today <span style=color:#ff79c6>=</span> SAT;
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;SAT 的值 = %d</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, today);   <span style=color:#6272a4>// 6
+</span></span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;HIGH = %d</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, HIGH);        <span style=color:#6272a4>// 100
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>switch</span> (today) {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>case</span> <span style=color:#8be9fd;font-style:italic>MON</span>: <span style=color:#ff79c6>case</span> <span style=color:#8be9fd;font-style:italic>TUE</span>: <span style=color:#ff79c6>case</span> <span style=color:#8be9fd;font-style:italic>WED</span>: <span style=color:#ff79c6>case</span> <span style=color:#8be9fd;font-style:italic>THU</span>: <span style=color:#ff79c6>case</span> <span style=color:#8be9fd;font-style:italic>FRI</span>:
+</span></span><span style=display:flex><span>            <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;工作日</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>break</span>;
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>case</span> <span style=color:#8be9fd;font-style:italic>SAT</span>: <span style=color:#ff79c6>case</span> <span style=color:#8be9fd;font-style:italic>SUN</span>:
+</span></span><span style=display:flex><span>            <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;周末</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>break</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=14-typedef-的四种常见用法>1.4 typedef 的四种常见用法</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 1. 给结构体起别名（最常用）
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#ff79c6>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> x;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> y;
+</span></span><span style=display:flex><span>} Point;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 2. 给数组类型起别名
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#8be9fd>int</span> Arr10[<span style=color:#bd93f9>10</span>];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 3. 给指针类型起别名
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>IntPtr;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 4. 给已有类型换个名字
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#8be9fd>unsigned</span> <span style=color:#8be9fd>int</span> uint;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    Point p <span style=color:#ff79c6>=</span> {<span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>4</span>};           <span style=color:#6272a4>// 不用再写 struct Point
+</span></span></span><span style=display:flex><span>    Arr10 a <span style=color:#ff79c6>=</span> {<span style=color:#bd93f9>0</span>};              <span style=color:#6272a4>// 等价于 int a[10] = {0};
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> value <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>42</span>;
+</span></span><span style=display:flex><span>    IntPtr ip <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>&amp;</span>value;         <span style=color:#6272a4>// 等价于 int *ip = &amp;value;
+</span></span></span><span style=display:flex><span>    uint count <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>100</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;p = (%d, %d), *ip = %d, count = %u</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, p.x, p.y, <span style=color:#ff79c6>*</span>ip, count);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=15-关键要点>1.5 关键要点</h3><ul><li><code>union</code> 和 <code>struct</code> 的区别：<code>struct</code> 各成员<strong>独立占内存</strong>（大小是总和 + 对齐），<code>union</code> 成员<strong>共享内存</strong>（大小取最大）</li><li>共用体最大的用途是<strong>节省内存</strong>和<strong>类型双关</strong>（同一块数据按不同类型解读）</li><li><code>enum</code> 变量的值可以超出枚举列表范围，因为它本质就是 <code>int</code></li><li><code>typedef</code> 不创建新类型，只是<strong>起别名</strong></li></ul><hr><h2 id=二动态内存分配与内存四区模型>二、动态内存分配与内存四区模型</h2><h3 id=21-内存四区本周最重要的概念>2.1 内存四区（本周最重要的概念）</h3><div class=table-wrapper><table><thead><tr><th>分区</th><th>存放内容</th><th>生命周期</th><th>由谁管理</th></tr></thead><tbody><tr><td><strong>栈区 stack</strong></td><td>局部变量、函数参数、返回地址</td><td>函数结束自动释放</td><td>编译器</td></tr><tr><td><strong>堆区 heap</strong></td><td><code>malloc</code> / <code>new</code> 申请的内存</td><td>手动释放前一直存在</td><td><strong>程序员</strong></td></tr><tr><td><strong>全局/静态区</strong></td><td>全局变量、<code>static</code> 变量</td><td>程序运行期间</td><td>系统</td></tr><tr><td><strong>常量区</strong></td><td>字符串字面量、<code>const</code> 全局常量</td><td>程序运行期间</td><td>系统</td></tr><tr><td><strong>代码区</strong></td><td>编译后的机器指令</td><td>程序运行期间</td><td>系统</td></tr></tbody></table></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdlib.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> g_value <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>;              <span style=color:#6272a4>// 全局区
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>demo</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> local <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>5</span>;             <span style=color:#6272a4>// 栈区
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>static</span> <span style=color:#8be9fd>int</span> s_count <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;    <span style=color:#6272a4>// 静态区
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>str <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;hello&#34;</span>;       <span style=color:#6272a4>// &#34;hello&#34; 在常量区，str 指针本身在栈区
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>heap <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>malloc</span>(<span style=color:#ff79c6>sizeof</span>(<span style=color:#8be9fd>int</span>));  <span style=color:#6272a4>// 指向的内存在堆区
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>*</span>heap <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>100</span>;
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;%d %d %s %d</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, local, g_value, str, <span style=color:#ff79c6>*</span>heap);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>free</span>(heap);                <span style=color:#6272a4>// 必须手动释放堆内存
+</span></span></span><span style=display:flex><span>    heap <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>;               <span style=color:#6272a4>// 释放后置空，防止野指针
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=22-四个内存函数的区别>2.2 四个内存函数的区别</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdlib.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;string.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// malloc：只申请，不初始化（内容是随机值）
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>p1 <span style=color:#ff79c6>=</span> (<span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>)<span style=color:#50fa7b>malloc</span>(<span style=color:#bd93f9>5</span> <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>sizeof</span>(<span style=color:#8be9fd>int</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// calloc：申请并全部初始化为 0，参数是 (个数, 单个大小)
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>p2 <span style=color:#ff79c6>=</span> (<span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>)<span style=color:#50fa7b>calloc</span>(<span style=color:#bd93f9>5</span>, <span style=color:#ff79c6>sizeof</span>(<span style=color:#8be9fd>int</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;malloc 后 p1[0] = %d（随机值）</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, p1[<span style=color:#bd93f9>0</span>]);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;calloc 后 p2[0] = %d（一定是0）</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, p2[<span style=color:#bd93f9>0</span>]);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// realloc：扩容/缩容，可能原地扩展，也可能搬家返回新地址
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>p3 <span style=color:#ff79c6>=</span> (<span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>)<span style=color:#50fa7b>realloc</span>(p1, <span style=color:#bd93f9>10</span> <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>sizeof</span>(<span style=color:#8be9fd>int</span>));
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (p3 <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        p1 <span style=color:#ff79c6>=</span> p3;   <span style=color:#6272a4>// 必须用返回值更新指针
+</span></span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// free：释放
+</span></span></span><span style=display:flex><span>    <span style=color:#50fa7b>free</span>(p1);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>free</span>(p2);
+</span></span><span style=display:flex><span>    p1 <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>;
+</span></span><span style=display:flex><span>    p2 <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong><code>realloc</code> 的关键陷阱：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// 错误写法：如果 realloc 失败返回 NULL，原来的 p 就丢了 → 内存泄漏
+</span></span></span><span style=display:flex><span>p <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>realloc</span>(p, newSize);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 正确写法：先用临时指针接收
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>tmp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>realloc</span>(p, newSize);
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> (tmp <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>    p <span style=color:#ff79c6>=</span> tmp;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=23-实战案例动态学生数组>2.3 实战案例：动态学生数组</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdlib.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#ff79c6>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>char</span> name[<span style=color:#bd93f9>20</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span>  score;
+</span></span><span style=display:flex><span>} Student;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 按成绩降序排序
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>sortByScore</span>(Student <span style=color:#ff79c6>*</span>arr, <span style=color:#8be9fd>int</span> n) {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> n <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>1</span>; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> j <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; j <span style=color:#ff79c6>&lt;</span> n <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>-</span> i; j<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (arr[j].score <span style=color:#ff79c6>&lt;</span> arr[j <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>].score) {
+</span></span><span style=display:flex><span>                Student tmp <span style=color:#ff79c6>=</span> arr[j];
+</span></span><span style=display:flex><span>                arr[j] <span style=color:#ff79c6>=</span> arr[j <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>];
+</span></span><span style=display:flex><span>                arr[j <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>] <span style=color:#ff79c6>=</span> tmp;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> n;
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;请输入学生人数：&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>scanf</span>(<span style=color:#f1fa8c>&#34;%d&#34;</span>, <span style=color:#ff79c6>&amp;</span>n);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 人数由用户决定，编译期无法确定 → 必须用动态内存
+</span></span></span><span style=display:flex><span>    Student <span style=color:#ff79c6>*</span>students <span style=color:#ff79c6>=</span> (Student <span style=color:#ff79c6>*</span>)<span style=color:#50fa7b>malloc</span>(n <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>sizeof</span>(Student));
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (students <span style=color:#ff79c6>==</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;内存分配失败</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> n; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;第 %d 个学生（姓名 成绩）：&#34;</span>, i <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>);
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>scanf</span>(<span style=color:#f1fa8c>&#34;%19s %d&#34;</span>, students[i].name, <span style=color:#ff79c6>&amp;</span>students[i].score);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>sortByScore</span>(students, n);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>=== 成绩排名 ===</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> n; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;第%d名：%s  %d分</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, i <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>, students[i].name, students[i].score);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>free</span>(students);      <span style=color:#6272a4>// 用完必须释放
+</span></span></span><span style=display:flex><span>    students <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=24-三类典型内存错误>2.4 三类典型内存错误</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// 错误1：内存泄漏 —— 申请了不释放
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>leak</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>malloc</span>(<span style=color:#bd93f9>100</span> <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>sizeof</span>(<span style=color:#8be9fd>int</span>));
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 函数结束，p 消失，但那 400 字节再也找不回来了
+</span></span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 错误2：野指针 —— 释放后继续使用
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>dangling</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>malloc</span>(<span style=color:#ff79c6>sizeof</span>(<span style=color:#8be9fd>int</span>));
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>;
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>free</span>(p);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;%d</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, <span style=color:#ff79c6>*</span>p);   <span style=color:#6272a4>// 未定义行为！p 指向的内存已经不属于你了
+</span></span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 错误3：重复释放
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>doubleFree</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>malloc</span>(<span style=color:#ff79c6>sizeof</span>(<span style=color:#8be9fd>int</span>));
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>free</span>(p);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>free</span>(p);              <span style=color:#6272a4>// 崩溃
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>防范手段</strong>：<code>free</code> 之后立刻 <code>p = NULL;</code>，这样后续误用会立刻崩溃暴露问题，而不是悄悄地破坏数据。</p><h3 id=25-关键要点>2.5 关键要点</h3><ul><li>栈空间很小（Windows 默认 1MB），<strong>大数组和不定长数据必须放堆上</strong></li><li><code>malloc</code> 返回值必须<strong>判空</strong>，分配失败会返回 <code>NULL</code></li><li><code>malloc</code> 返回 <code>void *</code>，C 语言中可以隐式转换，但<strong>加上强制类型转换是习惯</strong>（C++ 中必须加）</li><li><code>free</code> 和 <code>malloc</code> 必须<strong>一一配对</strong></li></ul><hr><h2 id=三文件操作>三、文件操作</h2><h3 id=31-打开与关闭>3.1 打开与关闭</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// &#34;r&#34; 只读（文件必须存在）
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// &#34;w&#34; 只写（不存在则创建，存在则清空！）
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// &#34;a&#34; 追加（不存在则创建，存在则在末尾续写）
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// &#34;r+&#34; 读写    &#34;w+&#34; 读写清空    &#34;a+&#34; 读和追加
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// 加 &#34;b&#34; 表示二进制模式，如 &#34;rb&#34;、&#34;wb&#34;
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    FILE <span style=color:#ff79c6>*</span>fp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fopen</span>(<span style=color:#f1fa8c>&#34;test.txt&#34;</span>, <span style=color:#f1fa8c>&#34;w&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (fp <span style=color:#ff79c6>==</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;文件打开失败</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// ... 读写操作 ...
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fclose</span>(fp);   <span style=color:#6272a4>// 必须关闭，否则缓冲区数据可能没写入磁盘
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=32-三种文本读写方式>3.2 三种文本读写方式</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// === 写入 ===
+</span></span></span><span style=display:flex><span>    FILE <span style=color:#ff79c6>*</span>fp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fopen</span>(<span style=color:#f1fa8c>&#34;data.txt&#34;</span>, <span style=color:#f1fa8c>&#34;w&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fputc</span>(<span style=color:#f1fa8c>&#39;A&#39;</span>, fp);                    <span style=color:#6272a4>// 字符读写
+</span></span></span><span style=display:flex><span>    <span style=color:#50fa7b>fputs</span>(<span style=color:#f1fa8c>&#34;Hello World</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, fp);        <span style=color:#6272a4>// 字符串读写
+</span></span></span><span style=display:flex><span>    <span style=color:#50fa7b>fprintf</span>(fp, <span style=color:#f1fa8c>&#34;%s %d</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, <span style=color:#f1fa8c>&#34;张三&#34;</span>, <span style=color:#bd93f9>90</span>); <span style=color:#6272a4>// 格式化读写
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fclose</span>(fp);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// === 读取 ===
+</span></span></span><span style=display:flex><span>    fp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fopen</span>(<span style=color:#f1fa8c>&#34;data.txt&#34;</span>, <span style=color:#f1fa8c>&#34;r&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> ch;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> ((ch <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fgetc</span>(fp)) <span style=color:#ff79c6>!=</span> EOF) {  <span style=color:#6272a4>// 逐字符读，EOF 表示读到文件尾
+</span></span></span><span style=display:flex><span>        <span style=color:#50fa7b>putchar</span>(ch);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fclose</span>(fp);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>按行读取（更常用）：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    FILE <span style=color:#ff79c6>*</span>fp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fopen</span>(<span style=color:#f1fa8c>&#34;data.txt&#34;</span>, <span style=color:#f1fa8c>&#34;r&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (fp <span style=color:#ff79c6>==</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>char</span> line[<span style=color:#bd93f9>256</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> lineNo <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// fgets 会保留行尾的 &#39;\n&#39;，读到文件尾或出错返回 NULL
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> (<span style=color:#50fa7b>fgets</span>(line, <span style=color:#ff79c6>sizeof</span>(line), fp) <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;第%d行：%s&#34;</span>, lineNo<span style=color:#ff79c6>++</span>, line);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fclose</span>(fp);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=33-二进制块读写效率更高>3.3 二进制块读写（效率更高）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdlib.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#ff79c6>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>char</span> name[<span style=color:#bd93f9>20</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span>  age;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span>  score;
+</span></span><span style=display:flex><span>} Student;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    Student list[<span style=color:#bd93f9>3</span>] <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>        {<span style=color:#f1fa8c>&#34;Alice&#34;</span>, <span style=color:#bd93f9>20</span>, <span style=color:#bd93f9>92</span>},
+</span></span><span style=display:flex><span>        {<span style=color:#f1fa8c>&#34;Bob&#34;</span>,   <span style=color:#bd93f9>21</span>, <span style=color:#bd93f9>78</span>},
+</span></span><span style=display:flex><span>        {<span style=color:#f1fa8c>&#34;Carol&#34;</span>, <span style=color:#bd93f9>19</span>, <span style=color:#bd93f9>88</span>}
+</span></span><span style=display:flex><span>    };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 写入：一次性把整个数组写进文件
+</span></span></span><span style=display:flex><span>    FILE <span style=color:#ff79c6>*</span>fp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fopen</span>(<span style=color:#f1fa8c>&#34;students.dat&#34;</span>, <span style=color:#f1fa8c>&#34;wb&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fwrite</span>(list, <span style=color:#ff79c6>sizeof</span>(Student), <span style=color:#bd93f9>3</span>, fp);
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>//        ↑数据首地址  ↑单块大小  ↑块数  ↑文件指针
+</span></span></span><span style=display:flex><span>    <span style=color:#50fa7b>fclose</span>(fp);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 读取：直接还原到内存结构体
+</span></span></span><span style=display:flex><span>    Student <span style=color:#ff79c6>*</span>buf <span style=color:#ff79c6>=</span> (Student <span style=color:#ff79c6>*</span>)<span style=color:#50fa7b>malloc</span>(<span style=color:#bd93f9>3</span> <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>sizeof</span>(Student));
+</span></span><span style=display:flex><span>    fp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fopen</span>(<span style=color:#f1fa8c>&#34;students.dat&#34;</span>, <span style=color:#f1fa8c>&#34;rb&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> count <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fread</span>(buf, <span style=color:#ff79c6>sizeof</span>(Student), <span style=color:#bd93f9>3</span>, fp);  <span style=color:#6272a4>// 返回实际读到的块数
+</span></span></span><span style=display:flex><span>    <span style=color:#50fa7b>fclose</span>(fp);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;成功读取 %d 条记录：</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, count);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> count; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;  %s, %d岁, %d分</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, buf[i].name, buf[i].age, buf[i].score);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>free</span>(buf);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=34-文件指针定位>3.4 文件指针定位</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    FILE <span style=color:#ff79c6>*</span>fp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fopen</span>(<span style=color:#f1fa8c>&#34;data.txt&#34;</span>, <span style=color:#f1fa8c>&#34;r&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// fseek(文件指针, 偏移量, 起始位置)
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// 起始位置：SEEK_SET(文件头) / SEEK_CUR(当前) / SEEK_END(文件尾)
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fseek</span>(fp, <span style=color:#bd93f9>0</span>, SEEK_END);       <span style=color:#6272a4>// 跳到文件末尾
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>long</span> size <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>ftell</span>(fp);        <span style=color:#6272a4>// 获取当前位置 = 文件总字节数
+</span></span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;文件大小：%ld 字节</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, size);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>rewind</span>(fp);                   <span style=color:#6272a4>// 回到文件开头
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fseek</span>(fp, <span style=color:#bd93f9>10</span>, SEEK_SET);      <span style=color:#6272a4>// 跳到第 11 个字节
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>char</span> ch <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fgetc</span>(fp);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;第11个字节是：%c</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, ch);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fclose</span>(fp);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=35-实战案例学生通讯录数据持久化>3.5 实战案例：学生通讯录（数据持久化）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdlib.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;string.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>#define MAX_STU 100
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define DATA_FILE &#34;contacts.txt&#34;
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#ff79c6>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>char</span> name[<span style=color:#bd93f9>20</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>char</span> phone[<span style=color:#bd93f9>15</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span>  age;
+</span></span><span style=display:flex><span>} Contact;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 保存到文件
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>saveToFile</span>(Contact <span style=color:#ff79c6>*</span>list, <span style=color:#8be9fd>int</span> n) {
+</span></span><span style=display:flex><span>    FILE <span style=color:#ff79c6>*</span>fp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fopen</span>(DATA_FILE, <span style=color:#f1fa8c>&#34;w&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (fp <span style=color:#ff79c6>==</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> n; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>fprintf</span>(fp, <span style=color:#f1fa8c>&#34;%s %s %d</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, list[i].name, list[i].phone, list[i].age);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fclose</span>(fp);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 从文件加载
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>loadFromFile</span>(Contact <span style=color:#ff79c6>*</span>list) {
+</span></span><span style=display:flex><span>    FILE <span style=color:#ff79c6>*</span>fp <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>fopen</span>(DATA_FILE, <span style=color:#f1fa8c>&#34;r&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (fp <span style=color:#ff79c6>==</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;   <span style=color:#6272a4>// 文件不存在 = 第一次运行
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> n <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> (n <span style=color:#ff79c6>&lt;</span> MAX_STU <span style=color:#ff79c6>&amp;&amp;</span>
+</span></span><span style=display:flex><span>           <span style=color:#50fa7b>fscanf</span>(fp, <span style=color:#f1fa8c>&#34;%19s %14s %d&#34;</span>, list[n].name, list[n].phone, <span style=color:#ff79c6>&amp;</span>list[n].age) <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>3</span>) {
+</span></span><span style=display:flex><span>        n<span style=color:#ff79c6>++</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>fclose</span>(fp);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> n;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    Contact list[MAX_STU];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> n <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>loadFromFile</span>(list);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;已加载 %d 条历史记录</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, n);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 新增一条
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (n <span style=color:#ff79c6>&lt;</span> MAX_STU) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>strcpy</span>(list[n].name, <span style=color:#f1fa8c>&#34;David&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>strcpy</span>(list[n].phone, <span style=color:#f1fa8c>&#34;13800138000&#34;</span>);
+</span></span><span style=display:flex><span>        list[n].age <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>22</span>;
+</span></span><span style=display:flex><span>        n<span style=color:#ff79c6>++</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>saveToFile</span>(list, n);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;保存成功，当前共 %d 条</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, n);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 打印全部
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> n; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;%-8s %-13s %d岁</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, list[i].name, list[i].phone, list[i].age);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=36-关键要点>3.6 关键要点</h3><ul><li><code>"w"</code> 模式会<strong>清空原有内容</strong>，想追加必须用 <code>"a"</code>，这是最容易踩的坑</li><li>文本模式会做换行符转换（Windows 下 <code>\n</code> ↔ <code>\r\n</code>），<strong>二进制模式不做任何转换</strong></li><li>结构体数据用 <code>fread</code> / <code>fwrite</code> 读写，比 <code>fprintf</code> / <code>fscanf</code> 快得多，但<strong>换行、空格会丢失</strong>，只适合程序自己读写</li><li><code>scanf</code> 的 <code>%19s</code> 限制读取长度，防止数组越界（缓冲区溢出）</li></ul><hr><h2 id=四链表本周重点>四、链表（本周重点）</h2><h3 id=41-为什么需要链表>4.1 为什么需要链表</h3><p>数组的两个硬伤：</p><ul><li>长度<strong>编译期就固定</strong>，运行时改不了（除非用动态内存，但扩容要整体搬家）</li><li>插入/删除要<strong>移动大量元素</strong>，效率 O(n)</li></ul><p>链表用<strong>离散的内存块 + 指针串联</strong>解决了这两个问题：</p><pre tabindex=0><code>数组（内存连续）：  [10][20][30][40]     插入要挪位置
+链表（内存离散）：  [10|●]→[20|●]→[30|∅]  插入只改指针
+</code></pre><h3 id=42-节点定义>4.2 节点定义</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#ff79c6>struct</span> Node {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> data;              <span style=color:#6272a4>// 数据域
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>struct</span> Node <span style=color:#ff79c6>*</span>next;     <span style=color:#6272a4>// 指针域，指向下一个节点
+</span></span></span><span style=display:flex><span>} Node;
+</span></span></code></pre></div><blockquote><p><strong>注意</strong>：结构体内部必须写 <code>struct Node *next</code>，不能写 <code>Node *next</code>，因为此时 <code>Node</code> 这个别名还没定义完。</p></blockquote><h3 id=43-完整实现增删改查>4.3 完整实现：增删改查</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdlib.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#ff79c6>struct</span> Node {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> data;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>struct</span> Node <span style=color:#ff79c6>*</span>next;
+</span></span><span style=display:flex><span>} Node;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ---------- 创建节点 ----------
+</span></span></span><span style=display:flex><span>Node <span style=color:#ff79c6>*</span><span style=color:#50fa7b>createNode</span>(<span style=color:#8be9fd>int</span> data) {
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>=</span> (Node <span style=color:#ff79c6>*</span>)<span style=color:#50fa7b>malloc</span>(<span style=color:#ff79c6>sizeof</span>(Node));
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (p <span style=color:#ff79c6>==</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;内存分配失败</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>exit</span>(<span style=color:#bd93f9>1</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    p<span style=color:#ff79c6>-&gt;</span>data <span style=color:#ff79c6>=</span> data;
+</span></span><span style=display:flex><span>    p<span style=color:#ff79c6>-&gt;</span>next <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> p;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ---------- 头部插入 O(1) ----------
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>pushFront</span>(Node <span style=color:#ff79c6>**</span>head, <span style=color:#8be9fd>int</span> data) {
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>createNode</span>(data);
+</span></span><span style=display:flex><span>    p<span style=color:#ff79c6>-&gt;</span>next <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>*</span>head;    <span style=color:#6272a4>// 新节点指向原来的头
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>*</span>head <span style=color:#ff79c6>=</span> p;          <span style=color:#6272a4>// 头指针指向新节点
+</span></span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ---------- 尾部插入 O(n) ----------
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>pushBack</span>(Node <span style=color:#ff79c6>**</span>head, <span style=color:#8be9fd>int</span> data) {
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>createNode</span>(data);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (<span style=color:#ff79c6>*</span>head <span style=color:#ff79c6>==</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {     <span style=color:#6272a4>// 空链表，直接作为头
+</span></span></span><span style=display:flex><span>        <span style=color:#ff79c6>*</span>head <span style=color:#ff79c6>=</span> p;
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>cur <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>*</span>head;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> (cur<span style=color:#ff79c6>-&gt;</span>next <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {   <span style=color:#6272a4>// 走到最后一个节点
+</span></span></span><span style=display:flex><span>        cur <span style=color:#ff79c6>=</span> cur<span style=color:#ff79c6>-&gt;</span>next;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    cur<span style=color:#ff79c6>-&gt;</span>next <span style=color:#ff79c6>=</span> p;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ---------- 遍历打印 ----------
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>printList</span>(Node <span style=color:#ff79c6>*</span>head) {
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>cur <span style=color:#ff79c6>=</span> head;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> (cur <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;%d -&gt; &#34;</span>, cur<span style=color:#ff79c6>-&gt;</span>data);
+</span></span><span style=display:flex><span>        cur <span style=color:#ff79c6>=</span> cur<span style=color:#ff79c6>-&gt;</span>next;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;NULL</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ---------- 查找 ----------
+</span></span></span><span style=display:flex><span>Node <span style=color:#ff79c6>*</span><span style=color:#50fa7b>find</span>(Node <span style=color:#ff79c6>*</span>head, <span style=color:#8be9fd>int</span> data) {
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>cur <span style=color:#ff79c6>=</span> head;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> (cur <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (cur<span style=color:#ff79c6>-&gt;</span>data <span style=color:#ff79c6>==</span> data) <span style=color:#ff79c6>return</span> cur;
+</span></span><span style=display:flex><span>        cur <span style=color:#ff79c6>=</span> cur<span style=color:#ff79c6>-&gt;</span>next;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>NULL</span>;   <span style=color:#6272a4>// 没找到
+</span></span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ---------- 删除第一个匹配的节点 ----------
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>deleteNode</span>(Node <span style=color:#ff79c6>**</span>head, <span style=color:#8be9fd>int</span> data) {
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>cur <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>*</span>head, <span style=color:#ff79c6>*</span>prev <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> (cur <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (cur<span style=color:#ff79c6>-&gt;</span>data <span style=color:#ff79c6>==</span> data) {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (prev <span style=color:#ff79c6>==</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>*</span>head <span style=color:#ff79c6>=</span> cur<span style=color:#ff79c6>-&gt;</span>next;    <span style=color:#6272a4>// 删的是头节点
+</span></span></span><span style=display:flex><span>            } <span style=color:#ff79c6>else</span> {
+</span></span><span style=display:flex><span>                prev<span style=color:#ff79c6>-&gt;</span>next <span style=color:#ff79c6>=</span> cur<span style=color:#ff79c6>-&gt;</span>next;  <span style=color:#6272a4>// 前一个节点跳过它
+</span></span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#50fa7b>free</span>(cur);
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        prev <span style=color:#ff79c6>=</span> cur;
+</span></span><span style=display:flex><span>        cur <span style=color:#ff79c6>=</span> cur<span style=color:#ff79c6>-&gt;</span>next;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ---------- 求长度 ----------
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>length</span>(Node <span style=color:#ff79c6>*</span>head) {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> len <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>cur <span style=color:#ff79c6>=</span> head;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> (cur <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        len<span style=color:#ff79c6>++</span>;
+</span></span><span style=display:flex><span>        cur <span style=color:#ff79c6>=</span> cur<span style=color:#ff79c6>-&gt;</span>next;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> len;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ---------- 释放整个链表（防内存泄漏）----------
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>freeList</span>(Node <span style=color:#ff79c6>**</span>head) {
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>cur <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>*</span>head;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> (cur <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        Node <span style=color:#ff79c6>*</span>next <span style=color:#ff79c6>=</span> cur<span style=color:#ff79c6>-&gt;</span>next;   <span style=color:#6272a4>// 必须先存下一个，否则 free 后就找不到了
+</span></span></span><span style=display:flex><span>        <span style=color:#50fa7b>free</span>(cur);
+</span></span><span style=display:flex><span>        cur <span style=color:#ff79c6>=</span> next;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>*</span>head <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// ---------- 测试 ----------
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>head <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>pushBack</span>(<span style=color:#ff79c6>&amp;</span>head, <span style=color:#bd93f9>10</span>);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>pushBack</span>(<span style=color:#ff79c6>&amp;</span>head, <span style=color:#bd93f9>20</span>);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>pushBack</span>(<span style=color:#ff79c6>&amp;</span>head, <span style=color:#bd93f9>30</span>);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>pushFront</span>(<span style=color:#ff79c6>&amp;</span>head, <span style=color:#bd93f9>5</span>);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;插入后：&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printList</span>(head);        <span style=color:#6272a4>// 5 -&gt; 10 -&gt; 20 -&gt; 30 -&gt; NULL
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;链表长度：%d</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, <span style=color:#50fa7b>length</span>(head));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    Node <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>find</span>(head, <span style=color:#bd93f9>20</span>);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (p <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>) {
+</span></span><span style=display:flex><span>        p<span style=color:#ff79c6>-&gt;</span>data <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>99</span>;       <span style=color:#6272a4>// 通过指针直接修改节点
+</span></span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;把 20 改成 99：&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printList</span>(head);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>deleteNode</span>(<span style=color:#ff79c6>&amp;</span>head, <span style=color:#bd93f9>10</span>);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;删除 10 后：&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printList</span>(head);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>freeList</span>(<span style=color:#ff79c6>&amp;</span>head);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;释放后 head = %p</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, (<span style=color:#8be9fd>void</span> <span style=color:#ff79c6>*</span>)head);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=44-为什么函数参数要用-node-head>4.4 为什么函数参数要用 <code>Node **head</code></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// 错误：只传了头指针的副本，函数内修改 head 影响不到外面
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>pushFront</span>(Node <span style=color:#ff79c6>*</span>head, <span style=color:#8be9fd>int</span> data) { ... }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 正确：传头指针的地址，才能真正修改调用者的 head
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>pushFront</span>(Node <span style=color:#ff79c6>**</span>head, <span style=color:#8be9fd>int</span> data) { ... }
+</span></span></code></pre></div><p><strong>判断标准</strong>：函数内是否需要<strong>改变头指针本身的指向</strong>？</p><ul><li>需要（插入头节点、删除头节点）→ 用 <code>Node **</code></li><li>不需要（遍历、查找、打印）→ 用 <code>Node *</code> 就够了</li></ul><h3 id=45-链表-vs-数组>4.5 链表 vs 数组</h3><div class=table-wrapper><table><thead><tr><th>对比项</th><th>数组</th><th>链表</th></tr></thead><tbody><tr><td>内存布局</td><td>连续</td><td>离散</td></tr><tr><td>随机访问</td><td>O(1)，<code>arr[i]</code> 直达</td><td>O(n)，必须从头遍历</td></tr><tr><td>头部插入/删除</td><td>O(n)，要挪元素</td><td><strong>O(1)</strong>，只改指针</td></tr><tr><td>长度</td><td>固定（或 realloc 搬家）</td><td>动态，随时增减</td></tr><tr><td>额外开销</td><td>无</td><td>每个节点多存一个指针</td></tr></tbody></table></div><h3 id=46-关键要点>4.6 关键要点</h3><ul><li><strong>画图！画图！画图！</strong> 链表的所有操作，先在纸上把指针的指向画清楚，再写代码</li><li>修改指针的<strong>顺序不能错</strong>：<code>p->next = *head;</code> 必须在 <code>*head = p;</code> 之前，否则原链表就断了</li><li><code>freeList</code> 里必须<strong>先保存 <code>next</code> 再 <code>free</code></strong>，否则 <code>cur->next</code> 已经是野内存</li><li>删除节点要考虑<strong>三种情况</strong>：删头节点、删中间节点、节点不存在</li></ul><hr><h2 id=五c-入门命名空间iostringvector>五、C++ 入门：命名空间、IO、string、vector</h2><h3 id=51-命名空间namespace>5.1 命名空间（namespace）</h3><p>解决的问题：不同库里有同名函数/变量时的<strong>命名冲突</strong>。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 定义两个命名空间，里面可以有同名的东西
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> Chinese {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> value <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>100</span>;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>void</span> <span style=color:#50fa7b>greet</span>() { std<span style=color:#ff79c6>::</span>cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;你好&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> std<span style=color:#ff79c6>::</span>endl; }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>namespace</span> English {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> value <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>200</span>;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>void</span> <span style=color:#50fa7b>greet</span>() { std<span style=color:#ff79c6>::</span>cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;Hello&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> std<span style=color:#ff79c6>::</span>endl; }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 方式1：作用域运算符 ::（最明确，推荐）
+</span></span></span><span style=display:flex><span>    Chinese<span style=color:#ff79c6>::</span>greet();
+</span></span><span style=display:flex><span>    std<span style=color:#ff79c6>::</span>cout <span style=color:#ff79c6>&lt;&lt;</span> English<span style=color:#ff79c6>::</span>value <span style=color:#ff79c6>&lt;&lt;</span> std<span style=color:#ff79c6>::</span>endl;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 方式2：using 声明单个名字
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>using</span> Chinese<span style=color:#ff79c6>::</span>value;
+</span></span><span style=display:flex><span>    std<span style=color:#ff79c6>::</span>cout <span style=color:#ff79c6>&lt;&lt;</span> value <span style=color:#ff79c6>&lt;&lt;</span> std<span style=color:#ff79c6>::</span>endl;   <span style=color:#6272a4>// 100
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 方式3：using namespace（图省事，但容易冲突，头文件里禁止用）
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> English;
+</span></span><span style=display:flex><span>    greet();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=52-cin--cout-对比-scanf--printf>5.2 cin / cout 对比 scanf / printf</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;string&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> age;
+</span></span><span style=display:flex><span>    string name;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// C 写法：scanf(&#34;%d %s&#34;, &amp;age, buf);  要记格式符、要取地址、要防溢出
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// C++ 写法：自动识别类型，不用格式符
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;请输入年龄：&#34;</span>;
+</span></span><span style=display:flex><span>    cin <span style=color:#ff79c6>&gt;&gt;</span> age;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;请输入姓名：&#34;</span>;
+</span></span><span style=display:flex><span>    cin <span style=color:#ff79c6>&gt;&gt;</span> name;          <span style=color:#6272a4>// string 自动扩容，不用担心缓冲区溢出
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;姓名：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> name <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;，年龄：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> age <span style=color:#ff79c6>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 连续输出用 &lt;&lt; 串起来
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;年龄的平方是 &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> age <span style=color:#ff79c6>*</span> age <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;，明年 &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> age <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34; 岁&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong><code>cin >></code> 和 <code>getline</code> 的区别（重要）：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#6272a4>// cin &gt;&gt; 遇到空格、Tab、换行就停止 → 读不了带空格的整行
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>// getline 读一整行，包括空格
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>string line;
+</span></span><span style=display:flex><span>cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;请输入一行（可含空格）：&#34;</span>;
+</span></span><span style=display:flex><span>getline(cin, line);
+</span></span><span style=display:flex><span>cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;你输入了：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> line <span style=color:#ff79c6>&lt;&lt;</span> endl;
+</span></span></code></pre></div><h3 id=53-string-常用操作>5.3 string 常用操作</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;string&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    string s1 <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;Hello&#34;</span>;
+</span></span><span style=display:flex><span>    string s2 <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;World&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 拼接
+</span></span></span><span style=display:flex><span>    string s3 <span style=color:#ff79c6>=</span> s1 <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#34; &#34;</span> <span style=color:#ff79c6>+</span> s2;
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> s3 <span style=color:#ff79c6>&lt;&lt;</span> endl;                    <span style=color:#6272a4>// Hello World
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 长度
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> s3.size() <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34; &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> s3.length() <span style=color:#ff79c6>&lt;&lt;</span> endl;   <span style=color:#6272a4>// 都是 11
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 访问字符（两种都行）
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> s3[<span style=color:#bd93f9>0</span>] <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34; &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> s3.at(<span style=color:#bd93f9>0</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;          <span style=color:#6272a4>// H H
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 比较（直接用 == != &lt; &gt;，按字典序）
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> (s1 <span style=color:#ff79c6>==</span> <span style=color:#f1fa8c>&#34;Hello&#34;</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;       <span style=color:#6272a4>// 1 (true)
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 查找，找不到返回 string::npos
+</span></span></span><span style=display:flex><span>    size_t pos <span style=color:#ff79c6>=</span> s3.find(<span style=color:#f1fa8c>&#34;World&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (pos <span style=color:#ff79c6>!=</span> string<span style=color:#ff79c6>::</span>npos) {
+</span></span><span style=display:flex><span>        cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;找到了，位置 &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> pos <span style=color:#ff79c6>&lt;&lt;</span> endl;   <span style=color:#6272a4>// 6
+</span></span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 截取 substr(起始位置, 长度)
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> s3.substr(<span style=color:#bd93f9>0</span>, <span style=color:#bd93f9>5</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;       <span style=color:#6272a4>// Hello
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> s3.substr(<span style=color:#bd93f9>6</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;          <span style=color:#6272a4>// World（省略长度 = 到末尾）
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 替换、插入、删除
+</span></span></span><span style=display:flex><span>    s3.replace(<span style=color:#bd93f9>0</span>, <span style=color:#bd93f9>5</span>, <span style=color:#f1fa8c>&#34;Hi&#34;</span>);
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> s3 <span style=color:#ff79c6>&lt;&lt;</span> endl;                    <span style=color:#6272a4>// Hi World
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 转 C 风格字符串（要传给 C 函数时用）
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>const</span> <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>cstr <span style=color:#ff79c6>=</span> s3.c_str();
+</span></span><span style=display:flex><span>    printf(<span style=color:#f1fa8c>&#34;%s</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, cstr);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=54-vector-容器>5.4 vector 容器</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;vector&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;string&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 创建
+</span></span></span><span style=display:flex><span>    vector<span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>int</span><span style=color:#ff79c6>&gt;</span> v1;                    <span style=color:#6272a4>// 空 vector
+</span></span></span><span style=display:flex><span>    vector<span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>int</span><span style=color:#ff79c6>&gt;</span> v2(<span style=color:#bd93f9>5</span>, <span style=color:#bd93f9>0</span>);              <span style=color:#6272a4>// 5 个元素，都初始化为 0
+</span></span></span><span style=display:flex><span>    vector<span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>int</span><span style=color:#ff79c6>&gt;</span> v3 <span style=color:#ff79c6>=</span> {<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>};        <span style=color:#6272a4>// 列表初始化
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 尾部添加（会自动扩容，这是 vector 最大的优势）
+</span></span></span><span style=display:flex><span>    v1.push_back(<span style=color:#bd93f9>10</span>);
+</span></span><span style=display:flex><span>    v1.push_back(<span style=color:#bd93f9>20</span>);
+</span></span><span style=display:flex><span>    v1.push_back(<span style=color:#bd93f9>30</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 遍历方式1：下标
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> v1.size(); i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        cout <span style=color:#ff79c6>&lt;&lt;</span> v1[i] <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34; &#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 遍历方式2：迭代器
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (vector<span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>int</span><span style=color:#ff79c6>&gt;::</span>iterator it <span style=color:#ff79c6>=</span> v1.begin(); it <span style=color:#ff79c6>!=</span> v1.end(); it<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#ff79c6>*</span>it <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34; &#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 遍历方式3：范围 for（C++11，最简洁）
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> <span style=color:#8be9fd;font-style:italic>x</span> : v1) {
+</span></span><span style=display:flex><span>        cout <span style=color:#ff79c6>&lt;&lt;</span> x <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34; &#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 常用操作
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;大小：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> v1.size() <span style=color:#ff79c6>&lt;&lt;</span> endl;        <span style=color:#6272a4>// 3
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;容量：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> v1.capacity() <span style=color:#ff79c6>&lt;&lt;</span> endl;    <span style=color:#6272a4>// 实际分配的内存能装几个
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;是否为空：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> v1.empty() <span style=color:#ff79c6>&lt;&lt;</span> endl;    <span style=color:#6272a4>// 0 (false)
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;首元素：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> v1.front() <span style=color:#ff79c6>&lt;&lt;</span> endl;      <span style=color:#6272a4>// 10
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;尾元素：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> v1.back() <span style=color:#ff79c6>&lt;&lt;</span> endl;       <span style=color:#6272a4>// 30
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    v1.pop_back();          <span style=color:#6272a4>// 删除最后一个
+</span></span></span><span style=display:flex><span>    v1.insert(v1.begin(), <span style=color:#bd93f9>5</span>);  <span style=color:#6272a4>// 在开头插入 5
+</span></span></span><span style=display:flex><span>    v1.erase(v1.begin());      <span style=color:#6272a4>// 删除开头元素
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=55-实战用-c-重写通讯录>5.5 实战：用 C++ 重写通讯录</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;string&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;vector&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>struct</span> <span style=color:#50fa7b>Student</span> {
+</span></span><span style=display:flex><span>    string name;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> score;
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 按成绩降序排序
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>sortByScore</span>(vector<span style=color:#ff79c6>&lt;</span>Student<span style=color:#ff79c6>&gt;</span> <span style=color:#ff79c6>&amp;</span>v) {   <span style=color:#6272a4>// 引用传参，避免整体拷贝
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (size_t i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> v.size(); i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>for</span> (size_t j <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; j <span style=color:#ff79c6>&lt;</span> v.size() <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>-</span> i; j<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (v[j].score <span style=color:#ff79c6>&lt;</span> v[j <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>].score) {
+</span></span><span style=display:flex><span>                Student tmp <span style=color:#ff79c6>=</span> v[j];
+</span></span><span style=display:flex><span>                v[j] <span style=color:#ff79c6>=</span> v[j <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>];
+</span></span><span style=display:flex><span>                v[j <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>] <span style=color:#ff79c6>=</span> tmp;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    vector<span style=color:#ff79c6>&lt;</span>Student<span style=color:#ff79c6>&gt;</span> students;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// C 版本要 malloc + 手动算长度，这里一行搞定
+</span></span></span><span style=display:flex><span>    students.push_back({<span style=color:#f1fa8c>&#34;张三&#34;</span>, <span style=color:#bd93f9>85</span>});
+</span></span><span style=display:flex><span>    students.push_back({<span style=color:#f1fa8c>&#34;李四&#34;</span>, <span style=color:#bd93f9>92</span>});
+</span></span><span style=display:flex><span>    students.push_back({<span style=color:#f1fa8c>&#34;王五&#34;</span>, <span style=color:#bd93f9>78</span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 还能继续添加，自动扩容
+</span></span></span><span style=display:flex><span>    string name;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> score;
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;再输入一个学生（姓名 成绩）：&#34;</span>;
+</span></span><span style=display:flex><span>    cin <span style=color:#ff79c6>&gt;&gt;</span> name <span style=color:#ff79c6>&gt;&gt;</span> score;
+</span></span><span style=display:flex><span>    students.push_back({name, score});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    sortByScore(students);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>=== 成绩排名 ===&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (size_t i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> students.size(); i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;第&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> i <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;名：&#34;</span>
+</span></span><span style=display:flex><span>             <span style=color:#ff79c6>&lt;&lt;</span> students[i].name <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;  &#34;</span>
+</span></span><span style=display:flex><span>             <span style=color:#ff79c6>&lt;&lt;</span> students[i].score <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;分&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 不用 free！vector 离开作用域自动释放内存
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=56-c-与-c-写法对照>5.6 C 与 C++ 写法对照</h3><div class=table-wrapper><table><thead><tr><th>功能</th><th>C 语言</th><th>C++</th></tr></thead><tbody><tr><td>字符串</td><td><code>char buf[50]</code> + <code>strcpy</code></td><td><code>string s</code> + <code>=</code></td></tr><tr><td>字符串拼接</td><td><code>strcat</code></td><td><code>s1 + s2</code></td></tr><tr><td>字符串比较</td><td><code>strcmp(a,b) == 0</code></td><td><code>a == b</code></td></tr><tr><td>动态数组</td><td><code>malloc</code> + 手动 <code>realloc</code></td><td><code>vector</code> + <code>push_back</code></td></tr><tr><td>输入输出</td><td><code>scanf</code> / <code>printf</code></td><td><code>cin</code> / <code>cout</code></td></tr><tr><td>申请内存</td><td><code>malloc</code> / <code>free</code></td><td><code>new</code> / <code>delete</code></td></tr><tr><td>内存释放</td><td><strong>必须手动 free</strong></td><td>容器自动管理</td></tr></tbody></table></div><h3 id=57-关键要点>5.7 关键要点</h3><ul><li><code>vector</code> 内部本质就是<strong>自动扩容的动态数组</strong>，理解了 <code>malloc</code> / <code>realloc</code> 就理解了它</li><li><code>size()</code> 是<strong>元素个数</strong>，<code>capacity()</code> 是<strong>已分配内存能装的个数</strong>，两者通常不相等</li><li><code>vector&lt;Student> &amp;v</code> 用<strong>引用传参</strong>很关键，否则整个 vector 会被复制一份，性能差且改不到原数据</li><li>头文件里<strong>不要写 <code>using namespace</code></strong>，会污染所有包含它的文件</li></ul><hr><h2 id=六c-引用与函数提高>六、C++ 引用与函数提高</h2><h3 id=61-引用是什么>6.1 引用是什么</h3><p>引用就是<strong>变量的别名</strong>，和原变量指向同一块内存：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> a <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>&amp;</span>r <span style=color:#ff79c6>=</span> a;      <span style=color:#6272a4>// r 是 a 的别名，必须在定义时初始化
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    r <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>20</span>;          <span style=color:#6272a4>// 改 r 就是改 a
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;a = &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> a <span style=color:#ff79c6>&lt;&lt;</span> endl;   <span style=color:#6272a4>// 20
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    a <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>30</span>;
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;r = &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> r <span style=color:#ff79c6>&lt;&lt;</span> endl;   <span style=color:#6272a4>// 30
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;&amp;a = &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#ff79c6>&amp;</span>a <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;, &amp;r = &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#ff79c6>&amp;</span>r <span style=color:#ff79c6>&lt;&lt;</span> endl;  <span style=color:#6272a4>// 地址完全相同
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=62-引用作函数参数对比指针写法>6.2 引用作函数参数（对比指针写法）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 值传递：改不到外面的变量
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>swapByValue</span>(<span style=color:#8be9fd>int</span> a, <span style=color:#8be9fd>int</span> b) {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> t <span style=color:#ff79c6>=</span> a; a <span style=color:#ff79c6>=</span> b; b <span style=color:#ff79c6>=</span> t;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 指针传递（C 语言写法）：要取地址、要解引用
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>swapByPointer</span>(<span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>a, <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>b) {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> t <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>*</span>a; <span style=color:#ff79c6>*</span>a <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>*</span>b; <span style=color:#ff79c6>*</span>b <span style=color:#ff79c6>=</span> t;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 引用传递（C++ 写法）：语法上就像直接操作原变量
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>swapByReference</span>(<span style=color:#8be9fd>int</span> <span style=color:#ff79c6>&amp;</span>a, <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>&amp;</span>b) {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> t <span style=color:#ff79c6>=</span> a; a <span style=color:#ff79c6>=</span> b; b <span style=color:#ff79c6>=</span> t;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> x <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>5</span>, y <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    swapByValue(x, y);
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;值传递后：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> x <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;, &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> y <span style=color:#ff79c6>&lt;&lt;</span> endl;      <span style=color:#6272a4>// 5, 10（没变）
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    swapByPointer(<span style=color:#ff79c6>&amp;</span>x, <span style=color:#ff79c6>&amp;</span>y);      <span style=color:#6272a4>// 要写 &amp;
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;指针交换后：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> x <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;, &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> y <span style=color:#ff79c6>&lt;&lt;</span> endl;    <span style=color:#6272a4>// 10, 5
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    swapByReference(x, y);      <span style=color:#6272a4>// 不用写 &amp;，看着像值传递，其实是引用
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;引用交换后：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> x <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;, &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> y <span style=color:#ff79c6>&lt;&lt;</span> endl;    <span style=color:#6272a4>// 5, 10
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=63-引用作返回值>6.3 引用作返回值</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 返回数组中最大元素的引用 → 可以当左值使用，直接修改原数组
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#ff79c6>&amp;</span>getLargest(<span style=color:#8be9fd>int</span> arr[], <span style=color:#8be9fd>int</span> n) {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> idx <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>; i <span style=color:#ff79c6>&lt;</span> n; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (arr[i] <span style=color:#ff79c6>&gt;</span> arr[idx]) idx <span style=color:#ff79c6>=</span> i;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> arr[idx];
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 危险示范：返回局部变量的引用
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#ff79c6>&amp;</span>dangerous() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> local <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>100</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> local;    <span style=color:#6272a4>// local 在函数结束时已销毁，引用变成野引用！
+</span></span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> arr[] <span style=color:#ff79c6>=</span> {<span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>9</span>, <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>7</span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;最大值：&#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> getLargest(arr, <span style=color:#bd93f9>4</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;   <span style=color:#6272a4>// 9
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    getLargest(arr, <span style=color:#bd93f9>4</span>) <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>100</span>;    <span style=color:#6272a4>// 把最大值改成 100
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>4</span>; i<span style=color:#ff79c6>++</span>) cout <span style=color:#ff79c6>&lt;&lt;</span> arr[i] <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34; &#34;</span>;
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> endl;                <span style=color:#6272a4>// 3 100 1 7
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=64-引用-vs-指针三个核心区别>6.4 引用 vs 指针（三个核心区别）</h3><div class=table-wrapper><table><thead><tr><th>对比项</th><th>引用 <code>&</code></th><th>指针 <code>*</code></th></tr></thead><tbody><tr><td>是否可为空</td><td><strong>不能</strong>，必须绑定有效对象</td><td>可以是 <code>NULL</code> / <code>nullptr</code></td></tr><tr><td>是否必须初始化</td><td><strong>必须</strong>，定义时就要绑定</td><td>可以先定义后赋值</td></tr><tr><td>能否改指向</td><td><strong>不能</strong>，一旦绑定终身不变</td><td>可以随时指向别的对象</td></tr><tr><td>是否占内存</td><td>编译器层面通常是别名（底层仍用指针实现）</td><td>明确占 4/8 字节</td></tr><tr><td>使用语法</td><td>直接用，无需解引用</td><td>要 <code>*</code> 解引用、<code>-></code> 访问成员</td></tr></tbody></table></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#8be9fd>int</span> a <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>, b <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>2</span>;
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#ff79c6>&amp;</span>r <span style=color:#ff79c6>=</span> a;
+</span></span><span style=display:flex><span>r <span style=color:#ff79c6>=</span> b;        <span style=color:#6272a4>// 这是【赋值】：把 b 的值给 a，r 仍然绑定 a！
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>&amp;</span>a;
+</span></span><span style=display:flex><span>p <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>&amp;</span>b;       <span style=color:#6272a4>// 这是【改指向】：p 现在指向 b
+</span></span></span></code></pre></div><blockquote><p><strong>这个区别极其容易搞混</strong>：<code>r = b</code> 不是让 r 变成 b 的别名，而是把 b 的值赋给 a。引用一旦绑定就<strong>无法解绑</strong>。</p></blockquote><p><strong>选用原则</strong>：</p><ul><li>能用引用就用引用（语法干净、不会空指针）</li><li>需要"可为空"、&ldquo;需要改指向&rdquo;、&ldquo;要做指针运算"时用指针</li><li>函数参数只是读取、且类型是内置类型（<code>int</code>、<code>double</code>）时，直接值传递即可</li></ul><h3 id=65-函数默认参数>6.5 函数默认参数</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 默认值必须【从右往左】连续设置
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>print</span>(<span style=color:#8be9fd>int</span> a, <span style=color:#8be9fd>int</span> b <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>, <span style=color:#8be9fd>int</span> c <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>20</span>) {
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> a <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;, &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> b <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;, &#34;</span> <span style=color:#ff79c6>&lt;&lt;</span> c <span style=color:#ff79c6>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    print(<span style=color:#bd93f9>1</span>);          <span style=color:#6272a4>// 1, 10, 20
+</span></span></span><span style=display:flex><span>    print(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>);       <span style=color:#6272a4>// 1, 2, 20
+</span></span></span><span style=display:flex><span>    print(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>);    <span style=color:#6272a4>// 1, 2, 3
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// print(1, , 3);  ← 不能跳过中间的参数
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=66-函数重载>6.6 函数重载</h3><p><strong>同一个函数名，参数列表不同</strong>，编译器根据实参自动匹配：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;string&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> <span style=color:#ff79c6>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 参数【类型】不同
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>int</span> a, <span style=color:#8be9fd>int</span> b) {
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;[int 版本] &#34;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> a <span style=color:#ff79c6>+</span> b;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>double</span> <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>double</span> a, <span style=color:#8be9fd>double</span> b) {
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;[double 版本] &#34;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> a <span style=color:#ff79c6>+</span> b;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 参数【个数】不同
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>int</span> a, <span style=color:#8be9fd>int</span> b, <span style=color:#8be9fd>int</span> c) {
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&#34;[三个 int] &#34;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> a <span style=color:#ff79c6>+</span> b <span style=color:#ff79c6>+</span> c;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 参数【顺序】不同
+</span></span></span><span style=display:flex><span>string <span style=color:#50fa7b>add</span>(string a, <span style=color:#8be9fd>int</span> b) {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> a <span style=color:#ff79c6>+</span> to_string(b);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>string <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>int</span> b, string a) {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> to_string(b) <span style=color:#ff79c6>+</span> a;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> add(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;           <span style=color:#6272a4>// int 版本 → 3
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> add(<span style=color:#bd93f9>1.5</span>, <span style=color:#bd93f9>2.5</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;       <span style=color:#6272a4>// double 版本 → 4
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> add(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;        <span style=color:#6272a4>// 三参数版本 → 6
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> add(<span style=color:#f1fa8c>&#34;num=&#34;</span>, <span style=color:#bd93f9>42</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;     <span style=color:#6272a4>// num=42
+</span></span></span><span style=display:flex><span>    cout <span style=color:#ff79c6>&lt;&lt;</span> add(<span style=color:#bd93f9>42</span>, <span style=color:#f1fa8c>&#34;=num&#34;</span>) <span style=color:#ff79c6>&lt;&lt;</span> endl;     <span style=color:#6272a4>// 42=num
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>重载的判定规则</strong>：只看<strong>参数列表</strong>（类型、个数、顺序），<strong>返回值类型不构成重载</strong>。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#6272a4>// 编译错误：只有返回值不同，不是重载
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span>    <span style=color:#50fa7b>func</span>(<span style=color:#8be9fd>int</span> a);
+</span></span><span style=display:flex><span><span style=color:#8be9fd>double</span> <span style=color:#50fa7b>func</span>(<span style=color:#8be9fd>int</span> a);   <span style=color:#6272a4>// error: 重定义
+</span></span></span></code></pre></div><h3 id=67-重载与默认参数的冲突>6.7 重载与默认参数的冲突</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#6272a4>// 这两个声明会冲突！
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>int</span> a, <span style=color:#8be9fd>int</span> b <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>);
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>int</span> a);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    add(<span style=color:#bd93f9>5</span>);   <span style=color:#6272a4>// error: 二义性 —— 编译器不知道该调用哪个
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>原因</strong>：<code>add(5)</code> 既能匹配第一个（b 用默认值 10），也能匹配第二个。实际项目中<strong>不要同时使用重载和默认参数</strong>，容易出这种歧义。</p><h3 id=68-关键要点>6.8 关键要点</h3><ul><li>引用的本质在编译器层面通常还是指针实现，但<strong>语法上屏蔽了解引用</strong>，更安全</li><li>引用<strong>不能返回局部变量</strong>，函数结束后栈内存已回收</li><li>默认参数<strong>从右往左</strong>设置；如果函数声明和定义分离，<strong>默认值只能写在声明处</strong>（<code>.h</code> 里）</li><li>函数重载靠<strong>参数列表</strong>区分，和返回值无关</li></ul><hr><h2 id=七常见坑点整理>七、常见坑点整理</h2><p>这周踩到的和容易踩的坑，集中记一下：</p><div class=table-wrapper><table><thead><tr><th>坑</th><th>现象</th><th>解决办法</th></tr></thead><tbody><tr><td><code>free</code> 后继续用指针</td><td>程序随机崩溃或数据错乱</td><td><code>free(p)</code> 后立刻 <code>p = NULL</code></td></tr><tr><td><code>realloc</code> 直接覆盖原指针</td><td>扩容失败时原内存泄漏</td><td>用临时指针接收返回值并判空</td></tr><tr><td><code>fopen</code> 用 <code>"w"</code> 打开已有文件</td><td><strong>文件内容被清空</strong></td><td>想追加用 <code>"a"</code>，先确认再打开</td></tr><tr><td>忘记 <code>fclose</code></td><td>缓冲区数据没落盘，文件内容不完整</td><td>每个 <code>fopen</code> 配对一个 <code>fclose</code></td></tr><tr><td>链表 <code>freeList</code> 里先 free 再取 next</td><td>访问已释放内存，崩溃</td><td>先 <code>next = cur->next</code> 再 <code>free(cur)</code></td></tr><tr><td>头插入时先改 head 再改 next</td><td>原链表丢失，只剩一个节点</td><td>顺序必须是 <code>p->next = *head; *head = p;</code></td></tr><tr><td><code>r = b</code> 以为是让引用改绑</td><td>引用绑定的对象被赋值了</td><td>引用一旦绑定<strong>无法解绑</strong></td></tr><tr><td>返回局部变量的引用</td><td>未定义行为，可能拿到垃圾值</td><td>返回堆上的指针，或返回值拷贝</td></tr><tr><td>重载 + 默认参数同时用</td><td>编译报"二义性"错误</td><td>二选一，别混用</td></tr><tr><td><code>cin >></code> 读带空格的输入</td><td>只读到第一个空格前</td><td>用 <code>getline(cin, s)</code></td></tr></tbody></table></div><hr><h2 id=八本周学习总结>八、本周学习总结</h2><div class=table-wrapper><table><thead><tr><th>知识点</th><th>掌握程度</th><th>备注</th></tr></thead><tbody><tr><td>共用体 / 枚举 / typedef</td><td>熟练</td><td>理解了共用体的内存共享机制</td></tr><tr><td>内存四区模型</td><td>熟练</td><td>能画出分区图，清楚各区生命周期</td></tr><tr><td>malloc / free 家族</td><td>熟练</td><td>动态学生数组完整实现</td></tr><tr><td>文件操作</td><td>熟练</td><td>文本与二进制读写都跑通了</td></tr><tr><td>单链表</td><td>基本掌握</td><td>增删改查手写通过，复杂操作还需练</td></tr><tr><td>C++ 命名空间 / IO</td><td>了解</td><td>语法不难，主要是习惯转换</td></tr><tr><td>string / vector</td><td>基本掌握</td><td>体会到了比 C 字符串好用太多</td></tr><tr><td>引用与函数重载</td><td>基本掌握</td><td>引用 vs 指针的区别还需巩固</td></tr></tbody></table></div><h3 id=本周最大的收获>本周最大的收获</h3><ol><li><p><strong>内存四区模型打通了任督二脉</strong>。之前学指针总有种"知道语法但不知道为什么"的感觉，理解了栈区和堆区的区别之后，<code>malloc</code>、链表、引用返回局部变量的坑，全都串起来了。</p></li><li><p><strong>链表是指针和结构体的终极考验</strong>。手写增删改查的过程里，暴露了很多对指针理解的模糊点，尤其是 <code>Node **head</code> 为什么要用二级指针。画内存图是唯一有效的办法。</p></li><li><p><strong>从 C 到 C++ 的核心转变是"少管内存&rdquo;</strong>。同样是通讯录，C 版本要 <code>malloc</code> + 算长度 + <code>free</code>，C++ 用 <code>vector</code> + <code>push_back</code> 几行搞定，还不会泄漏。</p></li></ol><h3 id=下周计划>下周计划</h3><ul><li><strong>类和对象</strong>：封装、<code>class</code> 与 <code>struct</code> 的区别、构造函数与析构函数、<code>this</code> 指针</li><li><strong>对象的初始化和清理</strong>：构造函数分类与调用方式、拷贝构造函数、深拷贝与浅拷贝（重点，和链表内存管理直接相关）</li><li><strong>C++ 内存管理</strong>：<code>new</code> / <code>delete</code>，对比 <code>malloc</code> / <code>free</code>，理解构造函数在 <code>new</code> 时被自动调用</li><li>把本周的通讯录用 <strong>类</strong> 重新封装一遍，作为综合练习</li></ul><hr><blockquote><p>本周所有代码都单独编译运行验证过，源码已按模块归档。继续坚持"每个知识点配一个可运行的 demo"。</p></blockquote></section><footer class="article-meta article-footer"><section class=article-tags><a href=/blog-source/tags/c%E8%AF%AD%E8%A8%80/>C语言</a>
+<a href=/blog-source/tags/c++/>C++</a>
+<a href=/blog-source/tags/%E9%93%BE%E8%A1%A8/>链表</a>
+<a href=/blog-source/tags/%E5%AD%A6%E4%B9%A0%E5%91%A8%E6%8A%A5/>学习周报</a></section><section class="article-copyright inline-meta"><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/ target=_blank rel=noopener>CC BY-NC-SA 4.0</a></span></section></footer></article><aside><h2 class=section-title>相关文章</h2><div class=subsection-list><div class=article-list--tile><article><a href=/blog-source/p/9.27%E5%AD%A6%E4%B9%A0%E5%91%A8%E6%8A%A5/><div class=article-details><h2 class=article-title>9.27学习周报</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2026 hanyuluo</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.3>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><script type=module>
+    import gallery from '\/blog-source\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script></main></div><script type=text/javascript src=/blog-source/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js defer></script></body></html>
